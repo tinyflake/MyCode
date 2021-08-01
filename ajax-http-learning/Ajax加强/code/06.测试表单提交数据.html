@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="" id="form1">
+
+        <input type="text" name="uname" autocomplete="off">
+
+        <input type="password" name="upwd">
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</body>
+<script>
+    // 通过DOM获取表单数据
+    var form1 = document.getElementById('form1')
+
+    // 注册事件
+    form1.addEventListener('submit', function(e) {
+        // 阻止表单默认行为
+        e.preventDefault()
+
+        // 创建FormData， 快速获取表单数据
+        var form = new FormData()
+
+        var xhr = new XMLHttpRequest()
+        xhr.open('post', 'http://www.liulongbin.top:3006/api/formdata')
+        xhr.send()
+
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                console.log(JSON.parse(xhr.responseText));
+            }
+        }
+    })
+</script>
+
+</html>

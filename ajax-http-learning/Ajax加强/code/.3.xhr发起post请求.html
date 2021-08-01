@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 创建 XHR 对象
+        var xhr = new XMLHttpRequest()
+
+        // 调用xhr.open()
+        xhr.open('POST', 'http://www.liulongbin.top:3006/api/addbook')
+
+        //设置content-type属性  
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+
+        // 调用xhr.send()
+        xhr.send('bookname=AAA&author=BBB&publisher=CCC')
+
+        // 监听onreadystatechange事件
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                // 获取服务器响应的数据
+                console.log(xhr.responseText);
+            }
+            var result = JSON.parse(xhr.responseText)
+            console.log(result);
+            console.log(JSON.stringify(result));
+        }
+    </script>
+
+</body>
+
+</html>

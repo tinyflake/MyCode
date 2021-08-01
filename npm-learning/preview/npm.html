@@ -1,0 +1,125 @@
+<html>
+  <head>
+	  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>i5ting_ztree_toc:</title>
+		<link href="toc/style/github-bf51422f4bb36427d391e4b75a1daa083c2d840e.css" media="all" rel="stylesheet" type="text/css"/>
+		<link href="toc/style/github2-d731afd4f624c99a4b19ad69f3083cd6d02b81d5.css" media="all" rel="stylesheet" type="text/css"/>
+		<link href="toc/css/zTreeStyle/zTreeStyle.css" media="all" rel="stylesheet" type="text/css"/>
+	  <style>
+		pre {
+		    counter-reset: line-numbering;
+		    border: solid 1px #d9d9d9;
+		    border-radius: 0;
+		    background: #fff;
+		    padding: 0;
+		    line-height: 23px;
+		    margin-bottom: 30px;
+		    white-space: pre;
+		    overflow-x: auto;
+		    word-break: inherit;
+		    word-wrap: inherit;
+		}
+
+		pre a::before {
+		  content: counter(line-numbering);
+		  counter-increment: line-numbering;
+		  padding-right: 1em; /* space after numbers */
+		  width: 25px;
+		  text-align: right;
+		  opacity: 0.7;
+		  display: inline-block;
+		  color: #aaa;
+		  background: #eee;
+		  margin-right: 16px;
+		  padding: 2px 10px;
+		  font-size: 13px;
+		  -webkit-touch-callout: none;
+		  -webkit-user-select: none;
+		  -khtml-user-select: none;
+		  -moz-user-select: none;
+		  -ms-user-select: none;
+		  user-select: none;
+		}
+
+		pre a:first-of-type::before {
+		  padding-top: 10px;
+		}
+
+		pre a:last-of-type::before {
+		  padding-bottom: 10px;
+		}
+
+		pre a:only-of-type::before {
+		  padding: 10px;
+		}
+
+		.highlight { background-color: #ffffcc } /* RIGHT */
+		</style>
+  </head>
+  <body>
+	  <div>
+				<div style='width:25%;'>
+						<ul id="tree" class="ztree" style='width:100%'>
+
+						</ul>
+				</div>
+        <div id='readme' style='width:70%;margin-left:20%;'>
+          	<article class='markdown-body'>
+            	<h3 id="1-npm-">1.npm是什么？为什么需要包？</h3>
+<p>因为node.js只提供底层api，导致开发时效率低 </p>
+<p>包是基于内置模块封装出来的，提供高级方便的api提高开发效率</p>
+<p>类似于 JQuery 和 js 的关系</p>
+<h3 id="2-">2.从何处下载包？</h3>
+<p><a href="http://www.npmjs.com">www.npmjs.com</a></p>
+<p><a href="http://www.registry.npmjs.org">www.registry.npmjs.org</a> 服务器对外共享包</p>
+<h3 id="3-">3.注意项目...</h3>
+<p>项目开发中吧node_modules文件夹添加到gitgnore忽略文件夹中</p>
+<h3 id="4-dependencies-">4.dependencies节点： 项目依赖包</h3>
+<p>属性名：版本号</p>
+<h3 id="5-package-json-">5.快速生成package.json配置文件</h3>
+<p>npm init -y</p>
+<p>仅在英文目录下运行！</p>
+<h3 id="6-">6.一次性安装所有包</h3>
+<p>npm install 命令会先读取package.json 中的包并安装所有包</p>
+<h3 id="7-devdependencies-">7.devDependencies 节点：开发的项目依赖包</h3>
+<p>npm i包名 --save-dev </p>
+<p>等价于：</p>
+<p> npm i 包名 -D或者 npm i  -D 包名 </p>
+<h3 id="8-">8.解决下包慢的问题</h3>
+<p>用淘宝NPM镜像服务器</p>
+<p>该服务器将外服包下到国内服务器再转发给国内用户</p>
+<p>镜像即副本</p>
+<h4 id="8-1-">8.1切换下包地址</h4>
+<pre><code class="lang-js">npm config get registry     //查看下包镜像源
+
+npm config setregistry=url     //切换下包地址
+</code></pre>
+<h4 id="8-2-nrm-">8.2用nrm工具切换下包镜像源</h4>
+<pre><code class="lang-js"> nrm ls     //查看所有镜像源
+
+nrm use 名字      //使用镜像源
+</code></pre>
+<h3 id="9-">9.包的分类：</h3>
+<p>项目包有     开发依赖包    和  核心依赖包</p>
+
+          	</article>
+        </div>
+		</div>
+  </body>
+</html>
+<script type="text/javascript" src="toc/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="toc/js/jquery.ztree.all-3.5.min.js"></script>
+<script type="text/javascript" src="toc/js/ztree_toc.js"></script>
+<script type="text/javascript" src="toc_conf.js"></script>
+
+<SCRIPT type="text/javascript" >
+<!--
+$(document).ready(function(){
+    var css_conf = eval(markdown_panel_style);
+    $('#readme').css(css_conf)
+    
+    var conf = eval(jquery_ztree_toc_opts);
+		$('#tree').ztree_toc(conf);
+});
+//-->
+</SCRIPT>
