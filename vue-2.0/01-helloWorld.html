@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 用自定义指令 闪动问题-->
+    <div id="app" v-cloak>
+        <div>{{msg}}</div>
+        <div>{{1+2}}</div>
+        <div>{{msg+'---'+123}}</div>
+    </div>
+
+
+    <!-- 1.v-text 建议使用-->
+    <div id="app">
+        <div v-text='msg'></div>
+    </div>
+
+    <!-- 2.v-html 不安全-->
+    <div id="app">
+        <div v-html='msg'></div>
+    </div>
+
+    <!-- 2.v-pre 跳过编译过程显示原始信息-->
+    <div id="app">
+        <div v-pre>{{msg}}</div>
+    </div>
+
+    <script src="./js/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app', //el元素挂载的位置  可以是CSS选择器或者是DOM元素    
+            data: { //模型数据  是个对象
+                msg: '<h1>Hello Vue</h1>',
+            },
+        })
+    </script>
+</body>
+
+</html>

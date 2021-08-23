@@ -1,0 +1,9 @@
+方式：编辑D:\Program Files\Git\etc\hosts，新增以下两行：
+(以下两个IP仅为我查询时的映射关系)
+
+52.69.186.44 github.com
+199.232.69.194 github.global.ssl.fastly.net
+
+刷新本地DNS解析的缓存
+
+ipconfig /flushdns

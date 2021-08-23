@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .active {
+            width: 100px;
+            height: 100px;
+            border: 1px solid pink;
+        }
+
+        .error {
+            background-color: antiquewhite;
+        }
+
+        .base {
+            border-radius: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div :class="{active: isActive,error:isError}">此处有内容</div>
+        <div :class='arrClasses'>此处有内容</div>
+        <div :class='objClasses'>此处有内容</div>
+        <div class="base" :class='objClasses'>此处有内容</div>
+        <button @click='handel'>切换</button>
+    </div>
+
+    <script src="./js/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                isActive: true,
+                isError: true,
+                arrClasses: ['active', 'error'],
+                objClasses: {
+                    active: true,
+                    error: true,
+                }
+            },
+            methods: {
+                handel: function () {
+                    // 控制isActive 在 true 和 false 间切换
+                    this.isActive = !this.isActive
+                    this.isError = !this.isError
+                    this.objClasses.active = false
+                    if (this.arrClasses[1]) {
+                        this.arrClasses.pop()
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

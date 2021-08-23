@@ -8,13 +8,17 @@ const app = express()
 app.get('/user', (req, res) => {
 
     // 向客户端发送 JSON 对象
-    res.send({ name: 'zs', age: 18, gender: '男' })
+    res.send({
+        name: 'zs',
+        age: 18,
+        gender: '男'
+    })
 })
 
 app.post('/user', (req, res) => {
 
-    req.query()
-        // 向客户端发送文本内容
+    // console.log(req.query);
+    // 向客户端发送文本内容
     res.send('请求成功')
 })
 

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <!-- 导入页面的基本样式 -->
+    <link rel="stylesheet" href="./css/search.css" />
+    <!-- 导入 jQuery -->
+    <script src="./lib/jquery.js"></script>
+    <!-- 导入模板引擎 -->
+    <script src="./lib/template-web.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Logo -->
+        <img src="./images/taobao_logo.png" alt="" class="logo" />
+
+        <div class="box">
+            <!-- tab 栏 -->
+            <div class="tabs">
+                <div class="tab-active">宝贝</div>
+                <div>店铺</div>
+            </div>
+            <!-- 搜索区域（搜索框和搜索按钮） -->
+            <div class="search-box">
+                <input type="text" class="ipt" id="ipt" placeholder="请输入要搜索的内容" /><button class="btnSearch">
+          搜索
+        </button>
+            </div>
+            <div id="suggest-list">
+
+            </div>
+        </div>
+
+    </div>
+</body>
+<!-- 列表模板结构 -->
+<script type="text/html" id="tpl-suggestList">
+    <!-- 循环返回的result -->
+    {{each result}}
+    <!-- 搜索建议项 -->
+    <div class="suggest-item">{{$value[0]}} </div>
+    {{/each}}
+</script>
+<script>
+    $(function() {
+
+        // 定义一个缓存对象
+        var cacheObj = {}
+
+        var timer = null
+            // 定义防抖函数
+        function debounceSearch(kw) {
+            timer = setTimeout(function() {
+                getSuggestList(kw)
+            }, 500)
+        }
+
+        // 给搜索框绑定输入事件
+        $('#ipt').on('keyup', function() {
+            clearTimeout(timer)
+            var keycode = $(this).val().trim()
+                // 判断搜索框是否为空
+            if (keycode.length <= 0) {
+                // 没有搜索信息则隐藏列表
+                return $('#suggest-list').empty().hide()
+            }
+            // 不为空时....
+            // 获取搜索列表  
+            // 判断缓存中是否有数据
+            if (cacheObj[keycode]) {
+                // 有数据则返回值
+                return renderSuggestList(cacheObj[keycode])
+            }
+            debounceSearch(keycode)
+        })
+
+
+        // 获取搜索列表方法
+        function getSuggestList(kw) {
+            // 发起ajax请求
+            $.ajax({
+                method: 'get',
+                url: 'http://suggest.taobao.com/sug?q=' + kw,
+                dataType: 'jsonp',
+                success: function(res) {
+                    // 渲到页面
+                    renderSuggestList(res)
+                }
+            })
+        }
+
+        // 渲染建议列表的方法
+        function renderSuggestList(res) {
+            // 判断有无需要渲染的数据
+            if (res.result.length <= 0) {
+                // 没有数据就清空id=suggest-list这个盒子并隐藏
+                return $('#suggest-list').empty().hide()
+            }
+
+            // 调用模板引擎
+            var htmlStr = template('tpl-suggestList', res)
+            $('#suggest-list').html(htmlStr).show()
+
+            // 将数据以键值对储存
+            var k = $('#ipt').val().trim()
+            cacheObj[k] = res
+        }
+    })
+</script>
+
+</html>

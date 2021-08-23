@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+
+        <div>{{username}}</div>
+
+
+        <div v-html="desc"></div>
+        <!--动态绑定placeholder -->
+        <input type="text" v-bind:placeholder="iptVal" />
+        <!--动态绑定img -->
+        <img :src="img" alt="">
+        <!-- v-bind  === : -->
+
+
+    </div>
+
+
+    <script src="./lib/vue-2.6.12.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                username: 'zs',
+                desc: '<h1 style="background-color:pink">111</h1>',
+                iptVal: '输出',
+                img: './images/myicon.jpg',
+            }
+        })
+    </script>
+</body>
+
+</html>

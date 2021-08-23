@@ -1,0 +1,24 @@
+1.生成ssh key
+进入git终端键入
+ssh-keygen -t rsa -b 4096 -C "1643196652@qq.com"
+连续三次回车
+即可生成
+
+2.github 远程添加ssh key
+
+3.git 终端检测ssh key 配置是否成功
+ssh -T git@github.com          
+使用-T   用-t 则会报错PTY allocation request failed on channel 0
+yes
+
+4.将git 管理的文件用ssh上传到github
+ git remote add origin git@github.com:tinyflake/test_03.git
+git branch -M main
+git push -u origin main
+
+
+
+
+*#*将远程仓库克隆到本地 
+git clone 地址
+

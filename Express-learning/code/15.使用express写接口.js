@@ -13,5 +13,5 @@ app.use('/api', router)
 
 //调用 app.listen()方法 启动服务器并 添加端口号
 app.listen(81, () => {
-    console.log('this express server is runing at http//127.0.0.1:81');
+    console.log('this express server is runing at http://127.0.0.1:81');
 })

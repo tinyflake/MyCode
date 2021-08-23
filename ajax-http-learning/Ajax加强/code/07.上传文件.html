@@ -6,15 +6,76 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../../lib/bootstrap.min.css">
+    <script src="../js/jquery.js"></script>
 </head>
 
 <body>
 
-    <form action="" id="form1">
-        <input type="file" name="" id="">
-        <button type="submit" class="btn btn-primary">上传文件</button>
-        <img src="" id="" width="800" alt="">
+    <form id="form1" action="#">
+        <!-- 文件选择框 -->
+        <input type="file" id="file1">
+        <!-- 上传文件按钮 -->
+        <button id="btnUpload">上传文件</button>
+        <!-- bootstarp进度条 -->
+        <div class="progress" style="width: 500px;margin: 15px 10px;">
+            <div class="progress-bar progress-bar-striped active" style="width: 0%" id="percent">
+                0%
+            </div>
+        </div>
+        <!-- 显示上传成功的图片 -->
+        <img src="" id="img" width="800" alt="">
     </form>
 </body>
+
+<script>
+    // 获取上传按钮
+    var btnUpload = document.querySelector('#btnUpload')
+        //绑定按钮点击事件
+    btnUpload.addEventListener('click', function() {
+        // 判断用户是否选择了文件
+        var files = document.querySelector('#file1').files
+        if (files.length <= 0) {
+            return alert('please check if you selected any file')
+        }
+        console.log('checked')
+
+        var fd = new FormData()
+
+        // 将用户选择的文件， 添加到FormData中
+        fd.append('avatar', files[0])
+
+        ///上传文件
+        var xhr = new XMLHttpRequest()
+
+        // 监听文件上传进度
+        xhr.upload.onprogress = function(e) {
+            if (e.lengthComputable) //如果可计算上传进度
+                var percentCompelete = Math.ceil((e.loaded / e.total) * 100)
+
+            //动态设置进度条
+            $('#percent').attr('style', 'width:' + percentCompelete + '%').html(percentCompelete + '%')
+        }
+        xhr.upload.onload = function() {
+            $('#percent').removeClass().addClass("progress-bar progress-bar-success ")
+        }
+
+        xhr.open('POST', 'http://www.liulongbin.top:3006/api/upload/avatar')
+        xhr.send(fd)
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var data = JSON.parse(xhr.responseText)
+                console.log(data);
+                if (data.status == 200) {
+                    console.log('上传成功');
+                    document.querySelector('#img').src = "http://www.liulongbin.top:3006" + data.url
+
+                } else {
+                    console.log('失败' + data.msg);
+                }
+            }
+        }
+    })
+</script>
 
 </html>

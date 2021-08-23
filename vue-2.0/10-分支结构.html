@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div v-if='a>=90'>棒！</div>
+        <div v-else-if='a>=60'>还不错！</div>
+        <div v-else>再接再厉！</div>
+        <div v-show='flag'>测试v-show</div>
+        <button @click='handel'>切换 </button>
+    </div>
+    <script src="./js/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                a: '99',
+                flag: true,
+            },
+            methods: {
+                handel: function () {
+                    this.flag = !this.flag
+                }
+            }
+        })
+        // v - show 控制元素是否显示 本质是display
+
+    </script>
+</body>
+
+</html>

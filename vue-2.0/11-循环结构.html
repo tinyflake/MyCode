@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- v-cloak提高用户体验消除闪动 -->
+    <div id="app" v-cloak>
+        <h4>水果列表</h4>
+        <ul>
+            <li v-for="item in friuts">{{item}}</li>
+            <li v-for="(item,index) in friuts">{{item +'---' + index}}</li>
+            <!--kye的作用是提高性能 -->
+            <li :key='index' v-for="(item,index) in myfriuts">
+                <span>{{item.ename}}</span>
+                <span>-------</span>
+                <span>{{item.cname}}</span>
+            </li>
+        </ul>
+    </div>
+
+    <script src="./js/vue.js"> </script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                friuts: ['a', 'b', 'c'],
+                myfriuts: [{
+                    ename: 'apple',
+                    cname: '苹果'
+                },
+                {
+                    ename: 'orange',
+                    cname: '橘子'
+                },
+                {
+                    ename: 'banana',
+                    cname: '香蕉'
+                }]
+            }
+        })
+    </script>
+</body>
+
+</html>
